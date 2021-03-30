@@ -4,6 +4,8 @@ import json
 import processor as pros
 import html_to_json
 from prettyprinter import pprint
+from datetime import datetime
+
 def obtainjson(url):
 		try:
 			return requests.get(url)
@@ -22,12 +24,12 @@ def savelist(edited):
 def animeinfo(currentanime):
 	return currentanime[0], currentanime[1][0], currentanime[1][1]
 def processpage(url,i,subber,nextepi,resolution,animename):
-	print('Processing - {}\n=========='.format(animename))
+	current_time = datetime.now().strftime("%H:%M:%S")
+	print('[{}] Processing - {} Episode {}\n====================='.format(current_time,animename,nextepi))
 	downloadprefix = 'https://nyaa.si'
 	word = pros.obtainjson(url).text
 	output_json = html_to_json.convert(word)
 	anime_rows = len(output_json['html'][0]['body'][0]['div'][0]['div'][0]['table'][0]['tbody'][0]['tr'])
-	# print(anime_rows)
 	print(url)
 	for i in range(anime_rows):
 		anime_selection = output_json['html'][0]['body'][0]['div'][0]['div'][0]['table'][0]['tbody'][0]['tr'][i]
