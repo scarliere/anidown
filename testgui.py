@@ -1,7 +1,7 @@
 import tkinter as tk
 import json
 
-with open("1.json", "r") as read_file:
+with open("latest_episodetest.json", "r") as read_file:
 	epidump = json.load(read_file)
 read_file.close()
 print(epidump)
