@@ -22,7 +22,7 @@ def savelist(edited):
 def animeinfo(currentanime):
 	return currentanime[0], currentanime[1][0], currentanime[1][1]
 def processpage(url,i,subber,nextepi,resolution,animename):
-	print('Processing - {}\n============'.format(animename))
+	print('Processing - {}\n=========='.format(animename))
 	downloadprefix = 'https://nyaa.si'
 	word = pros.obtainjson(url).text
 	output_json = html_to_json.convert(word)
@@ -38,8 +38,10 @@ def processpage(url,i,subber,nextepi,resolution,animename):
 			temp_download = downloadprefix+anime_selection['td'][2]['a'][0]['_attributes']['href']
 			print(temp_title)
 			print(temp_download)
-			# r = requests.get(temp_download, allow_redirects=True)
-			# open(temp_title+'.torrent', 'wb').write(r.content)
+			r = requests.get(temp_download, allow_redirects=True)
+			open(temp_title+'.torrent', 'wb').write(r.content)
+			print('\n')
 			return True
-	return False
 	print('\n')
+	return False
+	
